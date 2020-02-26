@@ -7,3 +7,6 @@ https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-
 
 ##添加本地代码到远端github创库
 https://github.com/hitrady/Community
+
+##github 切换远程https到ssh通道
+https://www.cnblogs.com/jason0529/p/6392905.html
