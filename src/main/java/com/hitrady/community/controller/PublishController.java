@@ -35,26 +35,32 @@ public class PublishController {
                             @RequestParam(name = "description") String description,
                             @RequestParam(name = "tag") String tag,
                             HttpServletRequest request){
+
         Cookie[] cookies = request.getCookies();
-        if (cookies == null){
+        User user = new User();
+        if (cookies == null) {
             return "index";
         }
-        for (Cookie cookie:cookies) {
-            if (cookie.getName().equals("token")){
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("token")) {
                 String token = cookie.getValue();
-                User user = userMapper.findByToken(token);
-                if (user != null){
-                    request.getSession().setAttribute("user",user);
+                user = userMapper.findByToken(token);
+                if (user != null) {
+                    request.getSession().setAttribute("user", user);
+
+                    Question question = new Question();
+                    question.setTitle(title);
+                    question.setDescription(description);
+                    question.setTag(tag);
+                    question.setCreator(user.getId());
+                    questionMapper.create(question);
                 }
                 break;
             }
         }
-
-        Question question = new Question();
-        question.setTitle(title);
-        question.setDescription(description);
-        question.setTag(tag);
-        questionMapper.create(question);
+        if (user == null){
+            return "index";
+        }
 
         return "publish";
     }

@@ -1,5 +1,5 @@
 -- auto-generated definition
-create table user2
+create table user
 (
     id           int auto_increment
         primary key,

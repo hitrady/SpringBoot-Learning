@@ -1,6 +1,5 @@
 package com.hitrady.community.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.hitrady.community.dto.AccessTokenDTO;
 import com.hitrady.community.dto.GithubUserDTO;
 import com.hitrady.community.mapper.UserMapper;
