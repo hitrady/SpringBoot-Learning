@@ -2,14 +2,11 @@ package com.hitrady.community.dto;
 
 import lombok.Data;
 
-@Data
 /**
- *功能描述
- * @author qqg
- * @date
-  * @param null
- * @return
+ * @author dingweiqiang
+ * @date 2020-04-27
  */
+@Data
 public class GithubUserDTO {
     private String name;
     private Long id;

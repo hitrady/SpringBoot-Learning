@@ -6,6 +6,7 @@ import com.hitrady.community.model.Question;
 import com.hitrady.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,8 @@ public class PublishController {
     public String doPublish(@RequestParam(name = "title") String title,
                             @RequestParam(name = "description") String description,
                             @RequestParam(name = "tag") String tag,
-                            HttpServletRequest request){
+                            HttpServletRequest request,
+                            Model model){
 
         Cookie[] cookies = request.getCookies();
         User user = new User();
@@ -47,13 +49,15 @@ public class PublishController {
                 user = userMapper.findByToken(token);
                 if (user != null) {
                     request.getSession().setAttribute("user", user);
-
                     Question question = new Question();
                     question.setTitle(title);
                     question.setDescription(description);
                     question.setTag(tag);
+                    question.setGmtCreate(String.valueOf(System.currentTimeMillis()));
+                    question.setGmtModified(question.getGmtCreate());
                     question.setCreator(user.getId());
                     questionMapper.create(question);
+                    model.addAttribute("question",question);
                 }
                 break;
             }
