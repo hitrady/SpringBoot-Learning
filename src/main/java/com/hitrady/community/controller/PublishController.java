@@ -39,7 +39,7 @@ public class PublishController {
                             Model model){
 
         Cookie[] cookies = request.getCookies();
-        User user = new User();
+        User user = null;
         if (cookies == null) {
             return "index";
         }
@@ -49,23 +49,25 @@ public class PublishController {
                 user = userMapper.findByToken(token);
                 if (user != null) {
                     request.getSession().setAttribute("user", user);
-                    Question question = new Question();
-                    question.setTitle(title);
-                    question.setDescription(description);
-                    question.setTag(tag);
-                    question.setGmtCreate(String.valueOf(System.currentTimeMillis()));
-                    question.setGmtModified(question.getGmtCreate());
-                    question.setCreator(user.getId());
-                    questionMapper.create(question);
-                    model.addAttribute("question",question);
                 }
                 break;
             }
         }
-        if (user == null){
-            return "index";
-        }
 
-        return "publish";
+        if (user == null){
+            model.addAttribute("error","用户未登录");
+            return "publish";
+        }
+        Question question = new Question();
+        question.setTitle(title);
+        question.setDescription(description);
+        question.setTag(tag);
+        question.setGmtCreate(String.valueOf(System.currentTimeMillis()));
+        question.setGmtModified(question.getGmtCreate());
+        question.setCreator(user.getId());
+        questionMapper.create(question);
+        model.addAttribute("question",question);
+
+        return "redirect:/";
     }
 }
