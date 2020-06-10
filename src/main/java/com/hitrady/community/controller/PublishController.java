@@ -53,7 +53,21 @@ public class PublishController {
                 break;
             }
         }
-
+        model.addAttribute("title",title);
+        model.addAttribute("description",description);
+        model.addAttribute("tag",tag);
+        if (title == null || title.equals("")){
+            model.addAttribute("error","title不能为空");
+            return "publish";
+        }
+        if (description == null|| description.equals("")){
+            model.addAttribute("error","description不能为空");
+            return "publish";
+        }
+        if (tag == null||tag.equals("")){
+            model.addAttribute("error","tag不能为空");
+            return "publish";
+        }
         if (user == null){
             model.addAttribute("error","用户未登录");
             return "publish";
@@ -66,8 +80,7 @@ public class PublishController {
         question.setGmtModified(question.getGmtCreate());
         question.setCreator(user.getId());
         questionMapper.create(question);
-        model.addAttribute("question",question);
-
+        //model.addAttribute("question",question);
         return "redirect:/";
     }
 }

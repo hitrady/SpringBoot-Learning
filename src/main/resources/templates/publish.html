@@ -21,10 +21,6 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="你的问题">
@@ -59,22 +55,22 @@
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
             <form action="/publish" method="post">
 
-                <li th:if="${session.user != null and question != null}">
+                <li th:if="${session.user != null}">
                 <div class="form-group">
                     <label for="title">问题标题（简单扼要）</label>
-                    <input type="text" class="form-control" name="title" placeholder="问题标题" th:value="${question.getTitle()}">
+                    <input type="text" class="form-control" name="title" placeholder="问题标题" th:value="${title}">
                 </div>
                 <div class="form-group">
                     <label for="title">问题补充（必填，请参照右侧提示）</label>
-                    <textarea class="form-control" name="description" placeholder="问题描述" cols="30" rows="10" th:text="${question.getDescription()}"></textarea>
+                    <textarea class="form-control" name="description" placeholder="问题描述" cols="30" rows="10" th:text="${description}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">添加标签：</label>
-                    <input type="text" class="form-control" name="tag" placeholder="输入标签，以','分隔" th:value="${question.getTag()}">
+                    <input type="text" class="form-control" name="tag" placeholder="输入标签，以','分隔" th:value="${tag}">
                 </div>
                 </li>
 
-                <li th:if="${session.user == null || question == null}">
+                <li th:if="${session.user == null}">
                     <div class="form-group">
                         <label for="title">问题标题（简单扼要）</label>
                         <input type="text" class="form-control" name="title" placeholder="问题标题" >
@@ -93,8 +89,8 @@
                     <div class="row">
                         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                             <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                                 th:text="${error}"
-                                 th:if="${error != null}">
+                                 th:if="${error != null}"
+                                 th:text="${error}">
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
@@ -104,6 +100,7 @@
                         </div>
                     </div>
                 </div>
+
             </form>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
