@@ -10,5 +10,5 @@ public class User {
     private String token;
     private String gmtCreate;
     private String gmtModified;
-    private String avatar;
+    private String avatarUrl;
 }

@@ -56,13 +56,13 @@
             <div class="media" th:each="question: ${questions}">
                 <div class="media-left">
                     <a href="#">
-                        <img class="media-object img-rounded" th:src="${question.getUser().getAvatar()}">
+                        <img class="media-object img-rounded" th:src="${question.getUser().getAvatarUrl()}">
                     </a>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading" th:text="${question.getTitle()}"></h4>
-                    <span th:text="${question.getDescription()}"></span>
-                    <span class="text-desc">• <span th:text="${question.getLikeCount()}"></span> 个回复 • <span th:text="${question.getViewCount()}"></span> 次浏览 • <span th:text="${#dates.createNow()}"></span> </span>
+                    <span th:text="${question.getDescription()}"></span><br>
+                    <span class="text-desc">• <span th:text="${question.getCommentCount()}"></span> 个回复 • <span th:text="${question.getViewCount()}"></span> 次浏览 • <span th:text="${#dates.createNow()}"></span> </span>
                 </div>
             </div>
         </div>
