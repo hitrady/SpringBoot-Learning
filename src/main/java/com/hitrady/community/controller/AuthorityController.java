@@ -53,6 +53,7 @@ public class AuthorityController {
             User user = new User();
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
+            user.setAvatar(githubUser.getAvatarUrl());
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setGmtCreate(String.valueOf(System.currentTimeMillis()));
