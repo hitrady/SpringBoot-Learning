@@ -14,9 +14,46 @@
 <div class="container-fluid main section">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-            <h2>
-                <span th:text="${sectionName}" ></span>
-            </h2>
+            <h2><span th:text="${sectionName}" ></span></h2>
+            <div class="media" th:each="question: ${pagination.getQuestions()}">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-rounded" th:src="${question.getUser().getAvatarUrl()}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading" th:text="${question.getTitle()}"></h4>
+                    <span th:text="${question.getDescription()}"></span><br>
+                    <span class="text-desc">
+                        • <span th:text="${question.getCommentCount()}"></span> 个回复
+                        • <span th:text="${question.getViewCount()}"></span> 次浏览
+                        • <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm:ss')}"></span>
+                    </span>
+                </div>
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li th:if="${pagination.firstPage}">
+                        <a th:href="@{/(page=${1})}" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li th:if="${pagination.prePage}">
+                        <a th:href="@{/(page=${(pagination.getPage()-1)})}" aria-label="Previous">&lt;</a>
+                    </li>
+                    <li th:each="page: ${pagination.getPages()}" th:class="${page==pagination.getPage()}? 'active'">
+                        <a th:href="@{/(page=${page})}" th:text="${page}"></a>
+                    </li>
+                    <li th:if="${pagination.nextPage}">
+                        <a th:href="@{/(page=${(pagination.getPage()+1)})}" aria-label="Next">&gt;</a>
+                    </li>
+                    <li th:if="${pagination.lastPage}">
+                        <a th:href="@{/(page=${pagination.getTotalPage()})}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div class="list-group nav">
