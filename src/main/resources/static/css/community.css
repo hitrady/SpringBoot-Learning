@@ -19,3 +19,6 @@ body{
     font-weight: normal;
     color: #999;
 }
+.section .nav{
+    margin-top: 15px;
+}

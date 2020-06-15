@@ -11,11 +11,11 @@ public class ProfileController {
     public String profile(@PathVariable(name = "action") String action,
                           Model model){
         if(action.equals("questions")){
-            model.addAttribute("profile",action);
-            model.addAttribute("profileName","我的问题");
-        }else if(action.equals("replay")){
-            model.addAttribute("profile",action);
-            model.addAttribute("profileName","我的回复");
+            model.addAttribute("section",action);
+            model.addAttribute("sectionName","我的问题");
+        }else if(action.equals("reply")){
+            model.addAttribute("section",action);
+            model.addAttribute("sectionName","我的回复");
         }
         return "profile";
     }
